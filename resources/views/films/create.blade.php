@@ -22,24 +22,40 @@
     </div>
 @endif
 
-<form action="{{ route('films.store') }}" method="POST">
+<form action="{{ route('films.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Название:</strong>
-                <input type="text" name="title" class="form-control">
+                <input type="text" name="name" class="form-control">
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-              <strong>Жанр:</strong>
-                <select name="" id=""></select>
+                <div class="form-group">
+            <label class="col-md-4 control-label" for="genres"><strong>Жанры:</strong></label>
+            <div class="col-md-4">
+                <select id="genres" name="genres[]" class="form-control" multiple="multiple">
+                @foreach ($genres as $key => $value)
+                    <option value="{{ $key }}"> 
+                        {{ $value }} 
+                    </option>
+                @endforeach 
+                </select>
+                
+            </div>
             </div>
         </div>
 
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <strong>Постер:</strong>
+                <input type="file" name="poster" class="form-control">     
+            </div>
+        </div>
+        <br>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Добавить</button>
         </div>

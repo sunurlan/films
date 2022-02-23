@@ -23,12 +23,14 @@
             <th>Название</th>
             <th>Статус</th>
             <th>Жанр</th>
+            <th>Постер</th>
         </tr>
         @foreach ($films as $film)
         <tr>
             <td>{{ $film->name }}</td>
-            <td>{{ $film->status ? 'Опубликован' : 'Не опубликован'}}</td>
+            <td>{{ $film->getStatusName() }}</td>
             <td>{{ $film->genres->implode('name', ', ') }}</td>
+            <td><img src="{{ $film->poster_link }}" alt="" style="max-width: 100px;"></td>
             <td>
                  <a class="btn btn-info" href="{{ route('films.show',$film->id) }}">Показать</a>
                     <a class="btn btn-primary" href="{{ route('films.edit',$film->id) }}">Редактировать</a>
